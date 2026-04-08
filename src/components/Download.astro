@@ -131,10 +131,11 @@ const platforms = [
             ))}
           </ol>
 
-          <!-- Gatekeeper warning -->
+          <!-- Gatekeeper workaround -->
           <div class="text-xs text-[color:var(--color-ink-mute)] font-light leading-relaxed border-l-2 border-[color:var(--color-line-strong)] pl-4">
-            <p class="mb-1.5"><strong class="text-[color:var(--color-ink-soft)]">First launch:</strong> the DMG is ad-hoc signed but not notarized by Apple.</p>
-            <p>macOS will show a warning. Right-click the app in Finder and select <em>Open</em> — this is only needed once.</p>
+            <p class="mb-2"><strong class="text-[color:var(--color-ink-soft)]">First launch — Gatekeeper:</strong> the DMG is ad-hoc signed but not notarized by Apple. On macOS Sonoma and later, you must remove the quarantine flag with one terminal command:</p>
+            <pre class="font-mono text-[11px] bg-[color:var(--color-paper)] border border-[color:var(--color-line)] px-3 py-2 rounded mb-2 overflow-x-auto text-[color:var(--color-ink)]"><code>xattr -dr com.apple.quarantine /Applications/MnM.app</code></pre>
+            <p>This is only needed once. A signed + notarized build is planned for Sprint 4.</p>
           </div>
         </div>
       </div>

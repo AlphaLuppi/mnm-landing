@@ -52,7 +52,7 @@
        inline opacity toggle. -->
   <div
     id="hero-scroll-hint"
-    class="absolute bottom-10 left-1/2 -translate-x-1/2 transition-opacity duration-500 ease-out"
+    class="absolute bottom-10 left-1/2 -translate-x-1/2 transition-opacity duration-300 ease-out"
     data-fade
     style="--fade-delay: 1400ms;"
   >
@@ -65,15 +65,22 @@
 
 <script>
   // Toggle .scroll-hidden on the scroll hint. Using a class (instead of
-  // inline styles) keeps the CSS cascade predictable: when the class is
-  // removed, the stylesheet reclaims opacity 1 and the hint fades back in.
+  // inline styles) keeps the CSS cascade predictable.
+  //
+  // Asymmetric hysteresis: hide when scrolled past 60px, bring it back
+  // early at 300px on the way up so users see it reappear mid-scroll,
+  // not only at the very top.
   const hint = document.getElementById('hero-scroll-hint');
   if (hint) {
+    let hidden = false;
     const onScroll = () => {
-      if (window.scrollY > 60) {
+      const y = window.scrollY;
+      if (!hidden && y > 60) {
         hint.classList.add('scroll-hidden');
-      } else {
+        hidden = true;
+      } else if (hidden && y < 300) {
         hint.classList.remove('scroll-hidden');
+        hidden = false;
       }
     };
     onScroll();

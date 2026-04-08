@@ -46,9 +46,35 @@
 
   </div>
 
-  <!-- Bottom scroll hint -->
-  <div class="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 animate-scroll-bob" data-fade style="--fade-delay: 1400ms;">
+  <!-- Bottom scroll hint — fades out as soon as the user starts scrolling -->
+  <div
+    id="hero-scroll-hint"
+    class="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 animate-scroll-bob transition-opacity duration-500 ease-out"
+    data-fade
+    style="--fade-delay: 1400ms;"
+  >
     <span class="font-mono text-[10px] uppercase tracking-[0.2em] text-[color:var(--color-ink-mute)]">Scroll</span>
     <span class="h-8 w-px bg-[color:var(--color-ink-mute)]"></span>
   </div>
 </section>
+
+<script>
+  // Fade out the scroll hint as the user begins to scroll.
+  // Uses a simple threshold (80px) for snappy feedback.
+  const hint = document.getElementById('hero-scroll-hint');
+  if (hint) {
+    const onScroll = () => {
+      const y = window.scrollY;
+      if (y > 80) {
+        hint.style.opacity = '0';
+        hint.style.pointerEvents = 'none';
+      } else {
+        // Let the normal fade-in reveal class control opacity at rest
+        hint.style.opacity = '';
+        hint.style.pointerEvents = '';
+      }
+    };
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+  }
+</script>

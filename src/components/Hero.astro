@@ -46,30 +46,32 @@
 
   </div>
 
-  <!-- Bottom scroll hint — fades out as soon as the user starts scrolling -->
+  <!-- Bottom scroll hint — fades out as soon as the user starts scrolling.
+       Outer div handles the fade transition; inner div handles the bob
+       animation. Separating them avoids the CSS animation fighting the
+       inline opacity toggle. -->
   <div
     id="hero-scroll-hint"
-    class="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 animate-scroll-bob transition-opacity duration-500 ease-out"
+    class="absolute bottom-10 left-1/2 -translate-x-1/2 transition-opacity duration-500 ease-out"
     data-fade
     style="--fade-delay: 1400ms;"
   >
-    <span class="font-mono text-[10px] uppercase tracking-[0.2em] text-[color:var(--color-ink-mute)]">Scroll</span>
-    <span class="h-8 w-px bg-[color:var(--color-ink-mute)]"></span>
+    <div class="flex flex-col items-center gap-2 animate-scroll-bob">
+      <span class="font-mono text-[10px] uppercase tracking-[0.2em] text-[color:var(--color-ink-mute)]">Scroll</span>
+      <span class="h-8 w-px bg-[color:var(--color-ink-mute)]"></span>
+    </div>
   </div>
 </section>
 
 <script>
-  // Fade out the scroll hint as the user begins to scroll.
-  // Uses a simple threshold (80px) for snappy feedback.
+  // Fade the scroll hint out once the user starts scrolling.
   const hint = document.getElementById('hero-scroll-hint');
   if (hint) {
     const onScroll = () => {
-      const y = window.scrollY;
-      if (y > 80) {
+      if (window.scrollY > 60) {
         hint.style.opacity = '0';
         hint.style.pointerEvents = 'none';
       } else {
-        // Let the normal fade-in reveal class control opacity at rest
         hint.style.opacity = '';
         hint.style.pointerEvents = '';
       }

@@ -64,16 +64,16 @@
 </section>
 
 <script>
-  // Fade the scroll hint out once the user starts scrolling.
+  // Toggle .scroll-hidden on the scroll hint. Using a class (instead of
+  // inline styles) keeps the CSS cascade predictable: when the class is
+  // removed, the stylesheet reclaims opacity 1 and the hint fades back in.
   const hint = document.getElementById('hero-scroll-hint');
   if (hint) {
     const onScroll = () => {
       if (window.scrollY > 60) {
-        hint.style.opacity = '0';
-        hint.style.pointerEvents = 'none';
+        hint.classList.add('scroll-hidden');
       } else {
-        hint.style.opacity = '';
-        hint.style.pointerEvents = '';
+        hint.classList.remove('scroll-hidden');
       }
     };
     onScroll();

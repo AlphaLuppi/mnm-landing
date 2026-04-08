@@ -178,6 +178,14 @@ h1, h2, h3, h4 {
     transform-origin: left center;
     animation: rule-grow 1.2s var(--ease-wabi) forwards;
   }
+
+  /* Scroll hint hide state — !important beats the [data-fade].is-visible rule
+     so the opacity transition actually takes effect; removing the class lets
+     the stylesheet reclaim opacity 1 and the hint bobs back in. */
+  #hero-scroll-hint.scroll-hidden {
+    opacity: 0 !important;
+    pointer-events: none;
+  }
 }
 
 /* Selection — warm */

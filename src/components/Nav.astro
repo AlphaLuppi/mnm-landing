@@ -1,18 +1,23 @@
 ---
-// Minimal nav — logo left, single CTA right. No menu.
+// Minimal nav — single square mark left, links right.
 ---
 
-<nav class="fixed top-0 left-0 right-0 z-50 px-6 lg:px-12 py-6 backdrop-blur-md bg-[color:var(--color-paper)]/70">
+<nav class="fixed top-0 left-0 right-0 z-50 px-6 lg:px-12 py-5 backdrop-blur-md bg-[color:var(--color-paper)]/75 border-b border-[color:var(--color-line)]/0 transition-all" id="site-nav">
   <div class="mx-auto max-w-7xl flex items-center justify-between">
-    <a href="/" class="flex items-center gap-3 group">
-      <!-- ASCII mark "MnM" — echoes the loader -->
+    <a href="/" class="group flex items-center" aria-label="MnM — home">
+      <!-- Full ASCII wordmark — identical to the webapp loader at ui/index.html.
+           Tiny font-size keeps the 6-line block at nav height. -->
       <span
-        class="font-mono text-[11px] leading-none text-[color:var(--color-ink-mute)] whitespace-pre select-none hidden sm:inline-block"
+        class="font-mono leading-[1.05] whitespace-pre text-[color:var(--color-ink-soft)] group-hover:text-[color:var(--color-ink)] transition-colors select-none"
+        style="font-size: 7px;"
         aria-hidden="true"
-      >{`███╗   ███╗ █████╗ ███╗   ███╗
-████╗ ████║██╔══██╗████╗ ████║
-██╔████╔██║██║  ██║██╔████╔██║`}</span>
-      <span class="font-display text-xl font-medium tracking-tight">MnM</span>
+      >{`███╗   ███╗       █████╗       ███╗   ███╗
+████╗ ████║      ██╔══██╗      ████╗ ████║
+██╔████╔██║      ██║  ██║      ██╔████╔██║
+██║╚██╔╝██║      ██║  ██║      ██║╚██╔╝██║
+██║ ╚═╝ ██║      ██║  ██║      ██║ ╚═╝ ██║
+╚═╝     ╚═╝ake   ╚═╝  ╚═╝o     ╚═╝     ╚═╝istake`}</span>
+      <span class="sr-only">MnM — Make No Mistake</span>
     </a>
 
     <div class="flex items-center gap-8">
@@ -29,6 +34,14 @@
         Download
       </a>
       <a
+        href="https://mnm.tomandrieu.com"
+        class="hidden md:inline-block text-sm text-[color:var(--color-ink-mute)] hover:text-[color:var(--color-ink)] transition-colors"
+        target="_blank"
+        rel="noopener"
+      >
+        Web version
+      </a>
+      <a
         href="https://github.com/AlphaLuppi/mnm"
         class="hidden md:inline-block text-sm text-[color:var(--color-ink-mute)] hover:text-[color:var(--color-ink)] transition-colors"
         target="_blank"
@@ -39,3 +52,19 @@
     </div>
   </div>
 </nav>
+
+<script>
+  // Nav becomes denser on scroll — subtle border appears
+  const nav = document.getElementById('site-nav');
+  if (nav) {
+    const onScroll = () => {
+      if (window.scrollY > 20) {
+        nav.classList.add('border-[color:var(--color-line)]/60');
+      } else {
+        nav.classList.remove('border-[color:var(--color-line)]/60');
+      }
+    };
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+  }
+</script>

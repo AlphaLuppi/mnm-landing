@@ -2,11 +2,11 @@
 // Hero — asymmetric grid, oversized serif, generous whitespace.
 ---
 
-<section class="relative min-h-[92dvh] flex items-center px-6 lg:px-12 pt-32 pb-24">
+<section class="relative min-h-[92dvh] flex items-center px-6 lg:px-12 pt-32 pb-24 overflow-hidden">
   <div class="mx-auto max-w-7xl w-full grid grid-cols-12 gap-6 lg:gap-12 items-center">
-    <!-- Left: oversized serif tagline -->
-    <div class="col-span-12 lg:col-span-8 xl:col-span-9" data-fade>
-      <div class="flex items-center gap-3 mb-10">
+    <!-- Left: oversized serif tagline (full width — no side column) -->
+    <div class="col-span-12">
+      <div class="flex items-center gap-3 mb-10" data-fade>
         <span class="h-px w-12 bg-[color:var(--color-line-strong)]"></span>
         <span class="font-mono text-[11px] uppercase tracking-[0.2em] text-[color:var(--color-ink-mute)]">
           v0.1 — macOS preview
@@ -14,17 +14,17 @@
       </div>
 
       <h1 class="font-display text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl leading-[0.95] tracking-tight text-[color:var(--color-ink)]">
-        Make<br/>
-        <span class="italic text-[color:var(--color-ink-soft)]" style="font-variation-settings: 'SOFT' 100, 'WONK' 1;">no</span><br/>
-        Mistake.
+        <span class="inline-block" data-fade="blur" style="--fade-delay: 120ms;">Make</span><br/>
+        <span class="inline-block italic text-[color:var(--color-ink-soft)]" data-fade="blur" style="font-variation-settings: 'SOFT' 100, 'WONK' 1; --fade-delay: 320ms;">no</span><br/>
+        <span class="inline-block" data-fade="blur" style="--fade-delay: 520ms;">Mistake.</span>
       </h1>
 
-      <p class="mt-12 max-w-xl text-lg md:text-xl leading-relaxed text-[color:var(--color-ink-soft)] font-light">
+      <p class="mt-12 max-w-xl text-lg md:text-xl leading-relaxed text-[color:var(--color-ink-soft)] font-light" data-fade style="--fade-delay: 780ms;">
         The supervision cockpit for AI agents. Orchestrate, trace, and govern
         your agent workflows — built for teams who can't afford to be wrong.
       </p>
 
-      <div class="mt-14 flex flex-col sm:flex-row items-start sm:items-center gap-6">
+      <div class="mt-14 flex flex-col sm:flex-row items-start sm:items-center gap-6" data-fade style="--fade-delay: 980ms;">
         <a
           href="#download"
           class="group inline-flex items-center gap-3 px-7 py-4 bg-[color:var(--color-ink)] text-[color:var(--color-paper)] text-sm font-medium tracking-wide hover:bg-[color:var(--color-ink-soft)] transition-colors"
@@ -33,7 +33,9 @@
           <span class="text-xs opacity-60 group-hover:translate-x-1 transition-transform">→</span>
         </a>
         <a
-          href="#features"
+          href="https://mnm.tomandrieu.com"
+          target="_blank"
+          rel="noopener"
           class="inline-flex items-center gap-2 text-sm text-[color:var(--color-ink-mute)] hover:text-[color:var(--color-ink)] transition-colors"
         >
           Try the web version
@@ -42,38 +44,10 @@
       </div>
     </div>
 
-    <!-- Right: small brand mark + vertical meta -->
-    <div class="hidden lg:flex col-span-4 xl:col-span-3 flex-col items-end justify-between h-full min-h-[60dvh]" data-fade style="--fade-delay: 200ms;">
-      <!-- Top: tiny MnM square icon echo -->
-      <div class="w-20 h-20 rounded-[22%] bg-[color:var(--color-ink)] text-[color:var(--color-paper)] flex items-center justify-center">
-        <span class="font-mono text-[8px] leading-[1.1] whitespace-pre text-center">{`███╗ ███╗
-████╗████║
-██╔██╔██║
-██║ ╚═╝██║`}</span>
-      </div>
-
-      <!-- Middle: vertical rule + tagline -->
-      <div class="flex flex-col items-end gap-4 mt-auto mb-auto">
-        <div class="h-16 w-px bg-[color:var(--color-line-strong)]"></div>
-        <p class="font-mono text-[10px] uppercase tracking-[0.2em] text-[color:var(--color-ink-faint)] text-right max-w-[12rem]">
-          Supervision<br/>
-          Traces<br/>
-          Governance
-        </p>
-      </div>
-
-      <!-- Bottom: studio signature -->
-      <div class="text-right">
-        <p class="font-mono text-[10px] uppercase tracking-[0.15em] text-[color:var(--color-ink-faint)]">
-          Made by<br/>
-          <span class="text-[color:var(--color-ink-mute)]">Studio Manifeste</span>
-        </p>
-      </div>
-    </div>
   </div>
 
   <!-- Bottom scroll hint -->
-  <div class="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-60">
+  <div class="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 animate-scroll-bob" data-fade style="--fade-delay: 1400ms;">
     <span class="font-mono text-[10px] uppercase tracking-[0.2em] text-[color:var(--color-ink-mute)]">Scroll</span>
     <span class="h-8 w-px bg-[color:var(--color-ink-mute)]"></span>
   </div>

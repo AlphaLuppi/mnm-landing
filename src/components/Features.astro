@@ -1,0 +1,82 @@
+---
+// Features — four pillars in an asymmetric grid.
+// Each card has ample whitespace, no icons, minimal decoration.
+
+const features = [
+  {
+    number: "01",
+    title: "Supervision",
+    subtitle: "Real-time cockpit",
+    body: "See every agent, every run, every decision — in a single cockpit. Live events via SSE, no polling, no delays. Built for operators who need to know exactly what's happening.",
+  },
+  {
+    number: "02",
+    title: "Traces",
+    subtitle: "Gold, Silver, Bronze",
+    body: "Every agent run is captured in three resolutions. Gold for scored phases and verdicts. Silver for grouped detail. Bronze for raw debug. Auto-generated at completion.",
+  },
+  {
+    number: "03",
+    title: "Governance",
+    subtitle: "Tag-based isolation",
+    body: "Dynamic RBAC, tag-scoped visibility, config layers with priority merge. Users only see what they should. Single tenant, multi-team. Built for compliance from day one.",
+  },
+  {
+    number: "04",
+    title: "Orchestration",
+    subtitle: "Multi-agent workflows",
+    body: "A2A messaging, workflow state machines, HITL validation, compaction snapshots. Chain agents, enforce stages, pause for human review. The whole stack, governed.",
+  },
+];
+---
+
+<section id="features" class="relative px-6 lg:px-12 py-32 lg:py-48">
+  <div class="mx-auto max-w-7xl">
+    <!-- Section intro -->
+    <div class="mb-24 lg:mb-32 max-w-3xl" data-fade>
+      <div class="flex items-center gap-3 mb-8">
+        <span class="h-px w-12 bg-[color:var(--color-line-strong)]"></span>
+        <span class="font-mono text-[11px] uppercase tracking-[0.2em] text-[color:var(--color-ink-mute)]">
+          Four pillars
+        </span>
+      </div>
+      <h2 class="font-display text-4xl md:text-5xl lg:text-6xl leading-[1.05] tracking-tight">
+        Everything an operator<br/>
+        <span class="italic text-[color:var(--color-ink-soft)]">needs to see.</span>
+      </h2>
+      <p class="mt-8 text-lg text-[color:var(--color-ink-soft)] max-w-xl font-light">
+        MnM exists because AI agents running in production need the same
+        operational rigor as any other critical system — observability,
+        governance, rollback, and audit. Not bolted on. Built in.
+      </p>
+    </div>
+
+    <!-- Grid — asymmetric, 2 cols on lg with alternating offset -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-px bg-[color:var(--color-line)]">
+      {features.map((f, i) => (
+        <article
+          class="bg-[color:var(--color-paper)] p-10 md:p-14 lg:p-16 min-h-[22rem] flex flex-col"
+          data-fade
+          style={`--fade-delay: ${i * 120}ms;`}
+        >
+          <div class="flex items-start justify-between mb-12">
+            <span class="font-mono text-[11px] uppercase tracking-[0.2em] text-[color:var(--color-ink-faint)]">
+              {f.number}
+            </span>
+            <span class="font-mono text-[10px] uppercase tracking-[0.15em] text-[color:var(--color-ink-faint)]">
+              {f.subtitle}
+            </span>
+          </div>
+
+          <h3 class="font-display text-3xl md:text-4xl lg:text-5xl leading-none tracking-tight mb-6">
+            {f.title}
+          </h3>
+
+          <p class="text-base leading-relaxed text-[color:var(--color-ink-soft)] font-light mt-auto max-w-md">
+            {f.body}
+          </p>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>

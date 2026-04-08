@@ -1,0 +1,95 @@
+---
+// Download section — Sprint 1 "coming soon" for all platforms.
+// Sprint 4+ will enable real download links.
+
+const platforms = [
+  {
+    name: "macOS",
+    subtitle: "Apple Silicon + Intel",
+    status: "Coming soon",
+    available: false,
+    sprint: "Sprint 4",
+  },
+  {
+    name: "Windows",
+    subtitle: "x64 + ARM64",
+    status: "Later",
+    available: false,
+    sprint: "Sprint 5",
+  },
+  {
+    name: "Linux",
+    subtitle: "AppImage, deb, rpm",
+    status: "Later",
+    available: false,
+    sprint: "Sprint 6",
+  },
+];
+---
+
+<section id="download" class="relative px-6 lg:px-12 py-32 lg:py-48">
+  <div class="mx-auto max-w-7xl">
+    <!-- Section intro -->
+    <div class="mb-20 max-w-3xl" data-fade>
+      <div class="flex items-center gap-3 mb-8">
+        <span class="h-px w-12 bg-[color:var(--color-line-strong)]"></span>
+        <span class="font-mono text-[11px] uppercase tracking-[0.2em] text-[color:var(--color-ink-mute)]">
+          Download
+        </span>
+      </div>
+      <h2 class="font-display text-4xl md:text-5xl lg:text-6xl leading-[1.05] tracking-tight">
+        Native desktop,<br/>
+        <span class="italic text-[color:var(--color-ink-soft)]">three platforms.</span>
+      </h2>
+      <p class="mt-8 text-lg text-[color:var(--color-ink-soft)] max-w-xl font-light">
+        Built with Tauri 2. Same React UI as the web version, wrapped in a
+        native shell — faster, lighter, and closer to the OS.
+      </p>
+    </div>
+
+    <!-- Platform cards -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-px bg-[color:var(--color-line)]">
+      {platforms.map((p, i) => (
+        <div
+          class="bg-[color:var(--color-paper)] p-10 lg:p-12 min-h-[20rem] flex flex-col group"
+          data-fade
+          style={`--fade-delay: ${i * 120}ms;`}
+        >
+          <div class="flex items-start justify-between mb-10">
+            <span class="font-mono text-[10px] uppercase tracking-[0.2em] text-[color:var(--color-ink-faint)]">
+              {p.subtitle}
+            </span>
+            <span class="font-mono text-[10px] uppercase tracking-[0.15em] text-[color:var(--color-ink-faint)]">
+              {p.sprint}
+            </span>
+          </div>
+
+          <h3 class="font-display text-3xl md:text-4xl lg:text-5xl leading-none tracking-tight mb-8">
+            {p.name}
+          </h3>
+
+          <div class="mt-auto">
+            <div class="inline-flex items-center gap-3 px-5 py-3 border border-[color:var(--color-line-strong)] text-[color:var(--color-ink-mute)] text-xs font-mono uppercase tracking-[0.15em] cursor-not-allowed">
+              {p.status}
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <!-- Secondary CTA -->
+    <div class="mt-16 flex flex-col md:flex-row items-start md:items-center justify-between gap-6 pt-12 border-t border-[color:var(--color-line)]" data-fade>
+      <p class="text-sm text-[color:var(--color-ink-mute)] max-w-md font-light">
+        Need it today? The web version is fully functional and production-ready.
+        Same features, accessible from any browser.
+      </p>
+      <a
+        href="#"
+        class="inline-flex items-center gap-3 px-7 py-4 border border-[color:var(--color-ink)] text-[color:var(--color-ink)] text-sm font-medium tracking-wide hover:bg-[color:var(--color-ink)] hover:text-[color:var(--color-paper)] transition-colors whitespace-nowrap"
+      >
+        Try the web version
+        <span class="text-xs opacity-60">↗</span>
+      </a>
+    </div>
+  </div>
+</section>

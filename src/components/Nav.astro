@@ -1,0 +1,41 @@
+---
+// Minimal nav — logo left, single CTA right. No menu.
+---
+
+<nav class="fixed top-0 left-0 right-0 z-50 px-6 lg:px-12 py-6 backdrop-blur-md bg-[color:var(--color-paper)]/70">
+  <div class="mx-auto max-w-7xl flex items-center justify-between">
+    <a href="/" class="flex items-center gap-3 group">
+      <!-- ASCII mark "MnM" — echoes the loader -->
+      <span
+        class="font-mono text-[11px] leading-none text-[color:var(--color-ink-mute)] whitespace-pre select-none hidden sm:inline-block"
+        aria-hidden="true"
+      >{`███╗   ███╗ █████╗ ███╗   ███╗
+████╗ ████║██╔══██╗████╗ ████║
+██╔████╔██║██║  ██║██╔████╔██║`}</span>
+      <span class="font-display text-xl font-medium tracking-tight">MnM</span>
+    </a>
+
+    <div class="flex items-center gap-8">
+      <a
+        href="#features"
+        class="hidden md:inline-block text-sm text-[color:var(--color-ink-mute)] hover:text-[color:var(--color-ink)] transition-colors"
+      >
+        Features
+      </a>
+      <a
+        href="#download"
+        class="hidden md:inline-block text-sm text-[color:var(--color-ink-mute)] hover:text-[color:var(--color-ink)] transition-colors"
+      >
+        Download
+      </a>
+      <a
+        href="https://github.com/AlphaLuppi/mnm"
+        class="hidden md:inline-block text-sm text-[color:var(--color-ink-mute)] hover:text-[color:var(--color-ink)] transition-colors"
+        target="_blank"
+        rel="noopener"
+      >
+        GitHub
+      </a>
+    </div>
+  </div>
+</nav>

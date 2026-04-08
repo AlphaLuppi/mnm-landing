@@ -1,0 +1,60 @@
+---
+// How it works — 3 steps, horizontal timeline, Wabi-Sabi typography.
+
+const steps = [
+  {
+    number: "i",
+    title: "Deploy",
+    body: "Single Docker container or bare-metal install. Embedded Postgres for dev, external for prod. Zero vendor lock-in.",
+  },
+  {
+    number: "ii",
+    title: "Connect",
+    body: "Point your agents at MnM via a simple adapter. Claude, Codex, Cursor, OpenCode — all supported out of the box.",
+  },
+  {
+    number: "iii",
+    title: "Observe",
+    body: "Every run, every trace, every decision. Surfaced in real-time. Scored, annotated, and archived automatically.",
+  },
+];
+---
+
+<section class="relative px-6 lg:px-12 py-32 lg:py-48 bg-[color:var(--color-paper-aged)]">
+  <div class="mx-auto max-w-7xl">
+    <!-- Section intro -->
+    <div class="mb-20 max-w-2xl mx-auto text-center" data-fade>
+      <div class="flex items-center justify-center gap-3 mb-8">
+        <span class="h-px w-8 bg-[color:var(--color-line-strong)]"></span>
+        <span class="font-mono text-[11px] uppercase tracking-[0.2em] text-[color:var(--color-ink-mute)]">
+          How it works
+        </span>
+        <span class="h-px w-8 bg-[color:var(--color-line-strong)]"></span>
+      </div>
+      <h2 class="font-display text-4xl md:text-5xl lg:text-6xl leading-[1.05] tracking-tight">
+        Three steps.<br/>
+        <span class="italic text-[color:var(--color-ink-soft)]">No surprises.</span>
+      </h2>
+    </div>
+
+    <!-- Steps grid -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-6 lg:gap-16 relative">
+      {steps.map((step, i) => (
+        <div class="relative flex flex-col items-start" data-fade style={`--fade-delay: ${i * 180}ms;`}>
+          <!-- Roman numeral in display serif -->
+          <span class="font-display text-7xl md:text-8xl lg:text-9xl italic text-[color:var(--color-ink-faint)] leading-none mb-8" style="font-variation-settings: 'SOFT' 100;">
+            {step.number}
+          </span>
+
+          <h3 class="font-display text-2xl md:text-3xl tracking-tight mb-4">
+            {step.title}
+          </h3>
+
+          <p class="text-base leading-relaxed text-[color:var(--color-ink-soft)] font-light max-w-xs">
+            {step.body}
+          </p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

@@ -1,0 +1,140 @@
+@import "tailwindcss";
+
+/*
+ * Wabi-Sabi Premium — design tokens.
+ * Inspired by natural aging, generous whitespace, and quiet confidence.
+ * Palette maps to Tailwind's stone + warm neutrals with a single terracotta accent.
+ */
+@theme {
+  /* Typography — variable fonts loaded from Google Fonts in BaseLayout */
+  --font-display: "Fraunces", ui-serif, Georgia, serif;
+  --font-body: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
+
+  /* Light mode (default) — warm cream, charcoal ink */
+  --color-paper: #faf7f2;
+  --color-paper-aged: #f5f1e8;
+  --color-ink: #1c1917;
+  --color-ink-soft: #44403c;
+  --color-ink-mute: #78716c;
+  --color-ink-faint: #a8a29e;
+  --color-line: #e7e5e4;
+  --color-line-strong: #d6d3d1;
+  --color-accent: #78350f;
+  --color-accent-soft: #a16207;
+
+  /* Spacing scale — generous, built for breathing room */
+  --spacing-section: 8rem;
+  --spacing-section-lg: 12rem;
+
+  /* Motion — slow, deliberate */
+  --ease-wabi: cubic-bezier(0.22, 1, 0.36, 1);
+  --duration-slow: 800ms;
+  --duration-medium: 500ms;
+}
+
+/* Dark mode via .dark class on html (user toggle — optional for later) */
+.dark {
+  --color-paper: #1c1917;
+  --color-paper-aged: #0c0a09;
+  --color-ink: #fafaf9;
+  --color-ink-soft: #e7e5e4;
+  --color-ink-mute: #a8a29e;
+  --color-ink-faint: #78716c;
+  --color-line: #292524;
+  --color-line-strong: #44403c;
+  --color-accent: #fcd34d;
+  --color-accent-soft: #fbbf24;
+}
+
+/* Base resets */
+html {
+  background-color: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-body);
+  font-feature-settings: "ss01", "cv11", "kern";
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--color-paper);
+  color: var(--color-ink);
+  min-height: 100dvh;
+  overflow-x: hidden;
+}
+
+/* Generous heading defaults — serif, tight leading, negative letter-spacing */
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  font-feature-settings: "ss01", "kern";
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+  font-weight: 500;
+}
+
+/* Subtle paper grain — barely visible, aged feel */
+.grain {
+  position: relative;
+  isolation: isolate;
+}
+.grain::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.35 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  opacity: 0.06;
+  mix-blend-mode: multiply;
+}
+
+/* Hand-drawn separator — subtle, irregular */
+.rule-hand {
+  display: block;
+  width: 100%;
+  height: 1px;
+  background: var(--color-line);
+  position: relative;
+}
+.rule-hand::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    var(--color-line-strong) 20%,
+    var(--color-line-strong) 80%,
+    transparent 100%
+  );
+}
+
+/* Slow fade-in on scroll — respects reduced motion */
+@media (prefers-reduced-motion: no-preference) {
+  .fade-in {
+    opacity: 0;
+    transform: translateY(12px);
+    animation: fade-in var(--duration-slow) var(--ease-wabi) forwards;
+    animation-delay: var(--fade-delay, 0ms);
+  }
+  @keyframes fade-in {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
+
+/* Selection — warm */
+::selection {
+  background: var(--color-ink);
+  color: var(--color-paper);
+}

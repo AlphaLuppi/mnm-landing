@@ -1,25 +1,35 @@
 ---
-// Download section — all platforms marked "Coming soon" until a real build
-// is signed, notarized and shipped.
+// Download section — macOS is available as Developer Preview (dev-only bundle,
+// ad-hoc signed, requires a locally running backend). Windows + Linux are
+// still placeholder "Coming soon".
+
+const RELEASE_TAG = "desktop-v0.1.0-preview";
+const MACOS_DMG = `https://github.com/AlphaLuppi/mnm/releases/download/${RELEASE_TAG}/MnM_0.1.0_aarch64.dmg`;
 
 const platforms = [
   {
     name: "macOS",
-    subtitle: "Apple Silicon + Intel",
-    status: "Coming soon",
-    eta: "In progress",
+    subtitle: "Apple Silicon",
+    status: "Developer Preview",
+    eta: "v0.1.0 available",
+    available: true,
+    href: MACOS_DMG,
   },
   {
     name: "Windows",
     subtitle: "x64 + ARM64",
     status: "Coming soon",
     eta: "Planned",
+    available: false,
+    href: null,
   },
   {
     name: "Linux",
     subtitle: "AppImage, deb, rpm",
     status: "Coming soon",
     eta: "Planned",
+    available: false,
+    href: null,
   },
 ];
 ---
@@ -66,12 +76,68 @@ const platforms = [
           </h3>
 
           <div class="mt-auto">
-            <div class="inline-flex items-center gap-3 px-5 py-3 border border-[color:var(--color-line-strong)] text-[color:var(--color-ink-mute)] text-xs font-mono uppercase tracking-[0.15em] cursor-not-allowed">
-              {p.status}
-            </div>
+            {p.available ? (
+              <a
+                href={p.href}
+                class="group/btn inline-flex items-center gap-3 px-6 py-3 bg-[color:var(--color-ink)] text-[color:var(--color-paper)] text-xs font-mono uppercase tracking-[0.15em] hover:bg-[color:var(--color-ink-soft)] transition-colors"
+              >
+                {p.status}
+                <span class="text-[10px] opacity-60 group-hover/btn:translate-y-0.5 transition-transform">↓</span>
+              </a>
+            ) : (
+              <div class="inline-flex items-center gap-3 px-5 py-3 border border-[color:var(--color-line-strong)] text-[color:var(--color-ink-mute)] text-xs font-mono uppercase tracking-[0.15em] cursor-not-allowed">
+                {p.status}
+              </div>
+            )}
           </div>
         </div>
       ))}
+    </div>
+
+    <!-- Developer preview warning + setup -->
+    <div class="mt-12 p-8 lg:p-10 border border-[color:var(--color-line-strong)] bg-[color:var(--color-paper-aged)]" data-fade>
+      <div class="flex items-start gap-6">
+        <span class="font-mono text-[10px] uppercase tracking-[0.2em] text-[color:var(--color-accent)] pt-1 flex-shrink-0">
+          ⚠ &nbsp;Important
+        </span>
+        <div class="flex-1">
+          <h3 class="font-display text-2xl md:text-3xl leading-tight mb-4">
+            This is a developer preview.
+          </h3>
+          <p class="text-sm md:text-base text-[color:var(--color-ink-soft)] font-light leading-relaxed mb-6 max-w-3xl">
+            The macOS build is a Tauri shell that currently needs a <strong class="text-[color:var(--color-ink)] font-medium">locally running MnM backend</strong> to function.
+            It is not a self-contained app yet. Before launching it, complete the setup below.
+          </p>
+
+          <!-- Setup steps -->
+          <ol class="space-y-4 mb-6">
+            {[
+              { n: "01", title: "Clone the MnM repository", cmd: "git clone git@github.com:AlphaLuppi/mnm.git" },
+              { n: "02", title: "Install workspace dependencies", cmd: "cd mnm && bun install" },
+              { n: "03", title: "Start the backend and leave this terminal open", cmd: "bun run dev:server" },
+              { n: "04", title: "Open MnM.app from /Applications", cmd: null },
+            ].map((s) => (
+              <li class="flex gap-4 items-start">
+                <span class="font-mono text-[10px] uppercase tracking-[0.2em] text-[color:var(--color-ink-faint)] pt-2 w-8 flex-shrink-0">
+                  {s.n}
+                </span>
+                <div class="flex-1 min-w-0">
+                  <p class="text-sm text-[color:var(--color-ink-soft)] mb-1.5">{s.title}</p>
+                  {s.cmd && (
+                    <pre class="font-mono text-xs bg-[color:var(--color-paper)] border border-[color:var(--color-line)] px-3 py-2 rounded overflow-x-auto text-[color:var(--color-ink)]"><code>{s.cmd}</code></pre>
+                  )}
+                </div>
+              </li>
+            ))}
+          </ol>
+
+          <!-- Gatekeeper warning -->
+          <div class="text-xs text-[color:var(--color-ink-mute)] font-light leading-relaxed border-l-2 border-[color:var(--color-line-strong)] pl-4">
+            <p class="mb-1.5"><strong class="text-[color:var(--color-ink-soft)]">First launch:</strong> the DMG is ad-hoc signed but not notarized by Apple.</p>
+            <p>macOS will show a warning. Right-click the app in Finder and select <em>Open</em> — this is only needed once.</p>
+          </div>
+        </div>
+      </div>
     </div>
 
     <!-- Secondary CTA -->

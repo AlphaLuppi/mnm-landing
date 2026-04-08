@@ -95,7 +95,7 @@ const platforms = [
     </div>
 
     <!-- Developer preview warning + setup -->
-    <div class="mt-12 p-8 lg:p-10 border border-[color:var(--color-line-strong)] bg-[color:var(--color-paper-aged)]" data-fade>
+    <div id="mnm-setup-guide" class="scroll-mt-28 mt-12 p-8 lg:p-10 border border-[color:var(--color-line-strong)] bg-[color:var(--color-paper-aged)]" data-fade>
       <div class="flex items-start gap-6">
         <span class="font-mono text-[10px] uppercase tracking-[0.2em] text-[color:var(--color-accent)] pt-1 flex-shrink-0">
           ⚠ &nbsp;Important
@@ -140,6 +140,29 @@ const platforms = [
         </div>
       </div>
     </div>
+
+    <script>
+      // After a .dmg download starts, smooth-scroll to the setup guide
+      // so users see the post-download instructions without having to
+      // hunt for them manually.
+      const downloadLinks = document.querySelectorAll<HTMLAnchorElement>(
+        '#download a[href$=".dmg"]'
+      );
+      for (const link of downloadLinks) {
+        link.addEventListener('click', () => {
+          // Let the download actually start before scrolling
+          window.setTimeout(() => {
+            const guide = document.getElementById('mnm-setup-guide');
+            if (!guide) return;
+            const nav = document.getElementById('site-nav');
+            const navH = nav ? nav.getBoundingClientRect().height : 0;
+            const top =
+              guide.getBoundingClientRect().top + window.scrollY - navH - 32;
+            window.scrollTo({ top, behavior: 'smooth' });
+          }, 150);
+        });
+      }
+    </script>
 
     <!-- Secondary CTA -->
     <div class="mt-16 flex flex-col md:flex-row items-start md:items-center justify-between gap-6 pt-12 border-t border-[color:var(--color-line)]" data-fade>

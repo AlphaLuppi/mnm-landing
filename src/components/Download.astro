@@ -2,16 +2,22 @@
 // Download section — macOS is available as Developer Preview (dev-only bundle,
 // ad-hoc signed, requires a locally running backend). Windows + Linux are
 // still placeholder "Coming soon".
+//
+// DMG distribution: binaries live in `public/downloads/`, served by GitHub
+// Pages under mnm.alphaluppi.fr/downloads/<file>. Older versions are kept
+// in the repo as a safety net, but only the CURRENT version is linked
+// from this page. To publish a new version, build the DMG, copy it into
+// `public/downloads/`, bump CURRENT_VERSION below, commit, push.
 
-const RELEASE_TAG = "desktop-v0.1.0-preview";
-const MACOS_DMG = `https://github.com/AlphaLuppi/mnm/releases/download/${RELEASE_TAG}/MnM_0.1.0_aarch64.dmg`;
+const CURRENT_VERSION = "0.1.1";
+const MACOS_DMG = `/downloads/MnM_${CURRENT_VERSION}_aarch64.dmg`;
 
 const platforms = [
   {
     name: "macOS",
     subtitle: "Apple Silicon",
     status: "Developer Preview",
-    eta: "v0.1.0 available",
+    eta: `v${CURRENT_VERSION} available`,
     available: true,
     href: MACOS_DMG,
   },

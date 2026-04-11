@@ -94,48 +94,71 @@ const platforms = [
       ))}
     </div>
 
-    <!-- Developer preview warning + setup -->
-    <div id="mnm-setup-guide" class="scroll-mt-28 mt-12 p-8 lg:p-10 border border-[color:var(--color-line-strong)] bg-[color:var(--color-paper-aged)]" data-fade>
-      <div class="flex items-start gap-6">
-        <span class="font-mono text-[10px] uppercase tracking-[0.2em] text-[color:var(--color-accent)] pt-1 flex-shrink-0">
-          ⚠ &nbsp;Important
-        </span>
-        <div class="flex-1">
-          <h3 class="font-display text-2xl md:text-3xl leading-tight mb-4">
-            This is a developer preview.
-          </h3>
-          <p class="text-sm md:text-base text-[color:var(--color-ink-soft)] font-light leading-relaxed mb-6 max-w-3xl">
-            The macOS build is a Tauri shell that currently needs a <strong class="text-[color:var(--color-ink)] font-medium">locally running MnM backend</strong> to function.
-            It is not a self-contained app yet. Before launching it, complete the setup below.
-          </p>
+    <!-- Setup guide -->
+    <div id="setup" class="scroll-mt-28 mt-12" data-fade>
+      <div id="mnm-setup-guide" class="p-8 lg:p-10 border border-[color:var(--color-line-strong)] bg-[color:var(--color-paper-aged)]">
+        <div class="flex items-start gap-6">
+          <span class="font-mono text-[10px] uppercase tracking-[0.2em] text-[color:var(--color-accent)] pt-1 flex-shrink-0">
+            ⚠ &nbsp;Important
+          </span>
+          <div class="flex-1">
+            <h3 class="font-display text-2xl md:text-3xl leading-tight mb-4">
+              MnM Desktop needs a backend.
+            </h3>
+            <p class="text-sm md:text-base text-[color:var(--color-ink-soft)] font-light leading-relaxed mb-8 max-w-3xl">
+              The desktop app is a <strong class="text-[color:var(--color-ink)] font-medium">thin client</strong> that connects to an MnM backend.
+              The backend is not shipped with the app — it runs separately, either on your company's server or on your own machine.
+              It is distributed <strong class="text-[color:var(--color-ink)] font-medium">on request</strong>, not via public download.
+            </p>
 
-          <!-- Setup steps -->
-          <ol class="space-y-4 mb-6">
-            {[
-              { n: "01", title: "Clone the MnM repository", cmd: "git clone git@github.com:AlphaLuppi/mnm.git" },
-              { n: "02", title: "Install workspace dependencies", cmd: "cd mnm && bun install" },
-              { n: "03", title: "Start the backend and leave this terminal open", cmd: "bun run dev:server" },
-              { n: "04", title: "Open MnM.app from /Applications", cmd: null },
-            ].map((s) => (
-              <li class="flex gap-4 items-start">
-                <span class="font-mono text-[10px] uppercase tracking-[0.2em] text-[color:var(--color-ink-faint)] pt-2 w-8 flex-shrink-0">
-                  {s.n}
-                </span>
-                <div class="flex-1 min-w-0">
-                  <p class="text-sm text-[color:var(--color-ink-soft)] mb-1.5">{s.title}</p>
-                  {s.cmd && (
-                    <pre class="font-mono text-xs bg-[color:var(--color-paper)] border border-[color:var(--color-line)] px-3 py-2 rounded overflow-x-auto text-[color:var(--color-ink)]"><code>{s.cmd}</code></pre>
-                  )}
-                </div>
-              </li>
-            ))}
-          </ol>
+            <!-- Two deployment paths -->
+            <div class="grid md:grid-cols-2 gap-px bg-[color:var(--color-line)] border border-[color:var(--color-line)] mb-8">
+              <div class="bg-[color:var(--color-paper)] p-6">
+                <p class="font-mono text-[10px] uppercase tracking-[0.2em] text-[color:var(--color-ink-faint)] mb-3">
+                  Option A &nbsp;·&nbsp; Company server
+                </p>
+                <h4 class="font-display text-xl leading-tight mb-3">Shared deployment.</h4>
+                <p class="text-sm text-[color:var(--color-ink-soft)] font-light leading-relaxed">
+                  Your IT team installs MnM backend on an internal server. Every employee points their desktop app at the same URL.
+                  Recommended for teams of 5+ and for enterprise environments with SSO.
+                </p>
+              </div>
 
-          <!-- Gatekeeper workaround -->
-          <div class="text-xs text-[color:var(--color-ink-mute)] font-light leading-relaxed border-l-2 border-[color:var(--color-line-strong)] pl-4">
-            <p class="mb-2"><strong class="text-[color:var(--color-ink-soft)]">First launch — Gatekeeper:</strong> the DMG is ad-hoc signed but not notarized by Apple. On macOS Sonoma and later, you must remove the quarantine flag with one terminal command:</p>
-            <pre class="font-mono text-[11px] bg-[color:var(--color-paper)] border border-[color:var(--color-line)] px-3 py-2 rounded mb-2 overflow-x-auto text-[color:var(--color-ink)]"><code>xattr -dr com.apple.quarantine /Applications/MnM.app</code></pre>
-            <p>This is only needed once. A signed + notarized build is planned for Sprint 4.</p>
+              <div class="bg-[color:var(--color-paper)] p-6">
+                <p class="font-mono text-[10px] uppercase tracking-[0.2em] text-[color:var(--color-ink-faint)] mb-3">
+                  Option B &nbsp;·&nbsp; Local machine
+                </p>
+                <h4 class="font-display text-xl leading-tight mb-3">Solo setup.</h4>
+                <p class="text-sm text-[color:var(--color-ink-soft)] font-light leading-relaxed">
+                  Install the backend on your own machine. The desktop app connects to
+                  <code class="font-mono text-xs bg-[color:var(--color-paper-aged)] border border-[color:var(--color-line)] px-1.5 py-0.5 rounded mx-0.5">http://localhost:3100</code>
+                  by default. Good for individual contributors and evaluation.
+                </p>
+              </div>
+            </div>
+
+            <!-- Request access CTA -->
+            <div class="flex flex-col md:flex-row items-start md:items-center gap-4 mb-8">
+              <a
+                href="https://studio.alphaluppi.fr/#contact"
+                target="_blank"
+                rel="noopener"
+                class="inline-flex items-center gap-3 px-7 py-4 bg-[color:var(--color-ink)] text-[color:var(--color-paper)] text-sm font-medium tracking-wide hover:bg-[color:var(--color-ink-soft)] transition-colors"
+              >
+                Request backend access
+                <span class="text-xs opacity-60">↗</span>
+              </a>
+              <p class="text-xs text-[color:var(--color-ink-mute)] font-light max-w-md leading-relaxed">
+                Tell us about your use case and we'll share the backend package with setup instructions.
+              </p>
+            </div>
+
+            <!-- Gatekeeper workaround -->
+            <div class="text-xs text-[color:var(--color-ink-mute)] font-light leading-relaxed border-l-2 border-[color:var(--color-line-strong)] pl-4">
+              <p class="mb-2"><strong class="text-[color:var(--color-ink-soft)]">First launch — Gatekeeper:</strong> the DMG is ad-hoc signed but not notarized by Apple. On macOS Sonoma and later, you must remove the quarantine flag once with:</p>
+              <pre class="font-mono text-[11px] bg-[color:var(--color-paper)] border border-[color:var(--color-line)] px-3 py-2 rounded mb-2 overflow-x-auto text-[color:var(--color-ink)]"><code>xattr -dr com.apple.quarantine /Applications/MnM.app</code></pre>
+              <p>A signed + notarized build is planned for a future release.</p>
+            </div>
           </div>
         </div>
       </div>
